@@ -264,7 +264,7 @@ no *consultar(no **avl, int codigo)
     }
 }
 
-//RemoÁ„o do github, porÈm com muitas modificaÁıes
+//Remo√ß√£o do github, por√©m com muitas modifica√ß√µes
 no *removerAvl(no *avl, int codigo){
     if(avl == NULL){
         printf("\nSem salas para remover!");
@@ -292,7 +292,7 @@ no *removerAvl(no *avl, int codigo){
             return aux;
         }
 
-        //Copiado do gpt, RemoÁ„o com dos filhos;
+        //Copiado do gpt, Remo√ß√£o com dois filhos;
         no *sucessor = avl->dir;
         while(sucessor->esq != NULL) {
             sucessor = sucessor->esq;
@@ -319,30 +319,30 @@ void exibirArvore(no *avl) {
 //Reservar pego do moodle
 hp* criarHeap(int capacidade) {
     hp* heap = (hp*)malloc(sizeof(hp));
-    heap->vetor = (reserva*)malloc((capacidade + 1) * sizeof(reserva)); // Aloca espaÁo para as reservas
+    heap->vetor = (reserva*)malloc((capacidade + 1) * sizeof(reserva)); // Aloca espa√ßo para as reservas
     heap->tamanho = 0;
     heap->capacidade = capacidade;
     return heap;
 }
 
-// FunÁ„o para inserir uma reserva na heap
+// Fun√ß√£o para inserir uma reserva na heap
 void inserirReserva(hp* heap, int codigo, int prioridade) {
      if (heap->tamanho >= heap->capacidade) {
         heap->capacidade *= 2;
         heap->vetor = (reserva*)realloc(heap->vetor, (heap->capacidade + 1) * sizeof(reserva));
     }
 
-    // Armazenar cÛdigo e prioridade diretamente
+    // Armazenar c√≥digo e prioridade diretamente
     heap->vetor[heap->tamanho + 1].codigo = codigo;
     heap->vetor[heap->tamanho + 1].prioridade = prioridade;
 
     heap->tamanho++;
 
-    // Ajusta a posiÁ„o da reserva para manter a propriedade da heap
+    // Ajusta a posi√ß√£o da reserva para manter a propriedade da heap
     int i = heap->tamanho;
     while (i > 1 && heap->vetor[i].prioridade > heap->vetor[i / 2].prioridade) {  // Compara com a prioridade do pai
         troca(&heap->vetor[i], &heap->vetor[i / 2]);  // Troca a reserva
-        i = i / 2;  // Desce na ·rvore para manter a propriedade da heap
+        i = i / 2;  // Desce na √°rvore para manter a propriedade da heap
     }
 }
 
@@ -365,7 +365,7 @@ void atualizar(hp *heap, int codigo, int Nova_Prioridade){
             return;
         }
     }
-    printf("Reserva com cÛdigo %d n„o encontrada.\n", codigo);
+    printf("Reserva com c√≥digo %d n√£o encontrada.\n", codigo);
 }
 
 void exibirReserva(hp* heap) {
