@@ -28,7 +28,7 @@ typedef struct AVL{
 //hash
 typedef struct EstadoSala {
     int codigo;
-    char estado[15]; // "disponÌvel", "bloqueada", etc.
+    char estado[15]; // "dispon√≠vel", "bloqueada", etc.
     struct EstadoSala *prox;
 }estadoSala;
 
@@ -37,7 +37,7 @@ typedef struct TabelaHash {
    int tamanho;
 }tabelaHash;
 
-//typedef hp *filaPrioridade; N„o È necessario;
+//typedef hp *filaPrioridade; N√£o √© necessario;
 
 //AVL
 no *criarNo(int codigo, int capacidade);
@@ -66,7 +66,7 @@ tabelaHash* criarTabela(int tamanho);
 int funcaoHash(tabelaHash *hs, int codigo_sala);
 void inserirEstado(tabelaHash *hs, int codigo, const char *estado);
 
-//operaÁoes hash
+//opera√ßoes hash
 char* consultarEstado(tabelaHash *hs, int codigo);
 void atualizarEstado(tabelaHash *hs, int codigo, char *novo_estado);
 void liberarHash(tabelaHash *hs);
@@ -114,7 +114,7 @@ int main(){
 					
 					}else if(strcmp(s1, "CANCELAR_RESERVA") == 0){
 						fscanf(arq, "%d", &codigo);
-						cancelarHeap(vetor, codigo); //N„o precisa apagar a sala, apenas cancelar a reserva; 
+						cancelarHeap(vetor, codigo); //N√£o precisa apagar a sala, apenas cancelar a reserva; 
 					}
 		}break;
 		
@@ -134,13 +134,16 @@ int main(){
 			int reserva;
 			if(strcmp(s1, "RESERVAR_SALA") == 0){
 				fscanf(arq, "%d %d", &codigo, &reserva);
+			char *estado = consultarEstado(codigo, estado);
+				if(strcmp(estado. "BLOQUEADO" == 0){
+					printf("Sala bloqueada");
+				}else{
 				if(consultar(&avl_Raiz, codigo) != NULL){
 					inserirReserva(vetor, codigo, reserva); //Consulta para depois inserir;	
 				}else{
 					printf("Numero %d Inexistente\n", codigo);
 				}
 			}
-			
 		}break;
 		
 		case 'A': {
@@ -155,7 +158,7 @@ int main(){
                 atualizarEstado(tabela, codigo, "bloqueada"); // Atualiza o estado na Tabela Hash
                 printf("Sala %d %s.\n", codigo, consultarEstado(tabela, codigo));
             } else {
-                printf("Sala %d n„o encontrada.\n", codigo);
+                printf("Sala %d n√£o encontrada.\n", codigo);
             }
         }break;
         
@@ -165,7 +168,7 @@ int main(){
                 atualizarEstado(tabela, codigo, "disponivel"); // Atualiza o estado na Tabela Hash
                 printf("Sala %d %s.\n", codigo, consultarEstado(tabela, codigo));
             } else {
-                printf("Sala %d n„o encontrada.\n", codigo);
+                printf("Sala %d n√£o encontrada.\n", codigo);
             }
 			
 		}break;
@@ -303,7 +306,7 @@ no* rotacaoDireita(no* avl) {
     return aux;
 }
 
-//N„o acho necessario dois ponteiros, mas funcionou;
+//N√£o acho necessario dois ponteiros, mas funcionou;
 no *consultar(no **avl, int codigo)
 {
 	if((*avl) == NULL){
@@ -343,30 +346,30 @@ void liberarArvore(no *avl) {
 //Reservar pego do moodle
 hp* criarHeap(int capacidade) {
     hp* heap = (hp*)malloc(sizeof(hp));
-    heap->vetor = (reserva*)malloc((capacidade + 1) * sizeof(reserva)); // Aloca espaÁo para as reservas
+    heap->vetor = (reserva*)malloc((capacidade + 1) * sizeof(reserva)); // Aloca espa√ßo para as reservas
     heap->tamanho = 0;
     heap->capacidade = capacidade;
     return heap;
 }
 
-// FunÁ„o para inserir uma reserva na heap
+// Fun√ß√£o para inserir uma reserva na heap
 void inserirReserva(hp* heap, int codigo, int prioridade) {
      if (heap->tamanho >= heap->capacidade) {
         heap->capacidade *= 2;
         heap->vetor = (reserva*)realloc(heap->vetor, (heap->capacidade + 1) * sizeof(reserva));
     }
 
-    // Armazenar cÛdigo e prioridade diretamente
+    // Armazenar c√≥digo e prioridade diretamente
     heap->vetor[heap->tamanho + 1].codigo = codigo;
     heap->vetor[heap->tamanho + 1].prioridade = prioridade;
 
     heap->tamanho++;
 
-    // Ajusta a posiÁ„o da reserva para manter a propriedade da heap
+    // Ajusta a posi√ß√£o da reserva para manter a propriedade da heap
     int i = heap->tamanho;
     while (i > 1 && heap->vetor[i].prioridade > heap->vetor[i / 2].prioridade) {  // Compara com a prioridade do pai
         troca(&heap->vetor[i], &heap->vetor[i / 2]);  // Troca a reserva
-        i = i / 2;  // Desce na ·rvore para manter a propriedade da heap
+        i = i / 2;  // Desce na √°rvore para manter a propriedade da heap
     }
 }
 
@@ -423,7 +426,7 @@ hp *cancelarHeap(hp *heap, int codigo){
     int i;
     for (i = 1; i <= heap->tamanho; i++) {
         if (heap->vetor[i].codigo == codigo) {
-            heap->vetor[i] = heap->vetor[heap->tamanho];  // Substitui pelo ˙ltimo
+            heap->vetor[i] = heap->vetor[heap->tamanho];  // Substitui pelo √∫ltimo
             heap->tamanho--; // Diminui o tamanho da heap
             heapify(heap, i); // Ajusta a heap
             printf("\nReserva com codigo %d cancelada.\n", codigo);
@@ -459,23 +462,23 @@ tabelaHash* criarTabela(int tamanho){
 }
 
 int funcaoHash(tabelaHash *hs, int codigo){
-    return codigo % hs->tamanho; // Usa o cÛdigo da sala para calcular o Ìndice
+    return codigo % hs->tamanho; // Usa o c√≥digo da sala para calcular o √≠ndice
 }
 
 void inserirEstado(tabelaHash *hs, int codigo, const char *estado){
     int indice = funcaoHash(hs, codigo);
 
-    // Cria um novo nÛ para o estado da sala
+    // Cria um novo n√≥ para o estado da sala
     estadoSala *novo = (estadoSala*)malloc(sizeof(estadoSala));
     novo->codigo = codigo;
     strcpy(novo->estado, estado);
     novo->prox = NULL;
 
-    // Insere na lista encadeada (tratamento de colisıes)
+    // Insere na lista encadeada (tratamento de colis√µes)
     if (hs->tabela[indice] == NULL) {
-        hs->tabela[indice] = novo; // Primeiro nÛ na posiÁ„o
+        hs->tabela[indice] = novo; // Primeiro n√≥ na posi√ß√£o
     } else {
-        // Percorre a lista encadeada atÈ o final
+        // Percorre a lista encadeada at√© o final
         estadoSala *atual = hs->tabela[indice];
         while (atual->prox != NULL) {
             atual = atual->prox;
@@ -487,7 +490,7 @@ void inserirEstado(tabelaHash *hs, int codigo, const char *estado){
 void atualizarEstado(tabelaHash *hs, int codigo, char *novo_estado){
     int indice = funcaoHash(hs, codigo);
 
-    // Percorre a lista encadeada no Ìndice correspondente
+    // Percorre a lista encadeada no √≠ndice correspondente
     estadoSala *atual = hs->tabela[indice];
     while (atual != NULL) {
         if (atual->codigo == codigo) {
@@ -497,14 +500,14 @@ void atualizarEstado(tabelaHash *hs, int codigo, char *novo_estado){
         atual = atual->prox;
     }
 
-    // Se a sala n„o foi encontrada
+    // Se a sala n√£o foi encontrada
     printf("Sala %d nao encontrada.\n", codigo);
 }
 
 char* consultarEstado(tabelaHash *hs, int codigo){
     int indice = funcaoHash(hs, codigo);
 
-    // Percorre a lista encadeada no Ìndice correspondente
+    // Percorre a lista encadeada no √≠ndice correspondente
     estadoSala *atual = hs->tabela[indice];
     while (atual != NULL) {
         if (atual->codigo == codigo) {
@@ -513,7 +516,7 @@ char* consultarEstado(tabelaHash *hs, int codigo){
         atual = atual->prox;
     }
 
-    // Se a sala n„o foi encontrada
+    // Se a sala n√£o foi encontrada
     return "Sala nao encontrada";
 }
 
@@ -522,13 +525,13 @@ void liberarHash(tabelaHash *hs){
 	if (hs == NULL) {
         return;
     }
-    // Percorre cada posiÁ„o da tabela
+    // Percorre cada posi√ß√£o da tabela
     for (i = 0; i < hs->tamanho; i++) {
         estadoSala *atual = hs->tabela[i];
         while (atual != NULL) {
             estadoSala *temp = atual;
             atual = atual->prox;
-            free(temp); // Libera cada nÛ da lista encadeada
+            free(temp); // Libera cada n√≥ da lista encadeada
         }
     }
     // Libera o array da tabela e a estrutura da Tabela Hash
