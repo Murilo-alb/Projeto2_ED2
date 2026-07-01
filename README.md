@@ -36,8 +36,3 @@ O sistema lê as instruções de um arquivo de entrada (ex: `entrada2.txt`). Os 
 ### Pré-requisitos
 * Um compilador C (como GCC).
 
-### Instalação e Execução
-
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/seu-usuario/nome-do-repositorio.git)
